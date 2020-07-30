@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import styles from './listbox.css';
 
 const Listbox = forwardRef(function Listbox(props, forwardedRef) {
   const [active, setActive] = useState(false);
@@ -121,7 +120,6 @@ const ListOptionRefType = PropTypes.shape({
 
 Listbox.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
   labelledBy: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   refs: PropTypes.arrayOf(ListOptionRefType).isRequired,
@@ -129,7 +127,6 @@ Listbox.propTypes = {
 };
 
 Listbox.defaultProps = {
-  className: styles.container,
   children: undefined,
   onChange: () => {},
   value: undefined,

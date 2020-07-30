@@ -38,7 +38,7 @@
 }
 
 .popup-container {
-  composes: container from '../listbox/listbox.css';
+  composes: dropdown from '../dropdown/dropdown.css';
   background-color: var(--white);
   box-sizing: border-box;
   max-height: 160px;

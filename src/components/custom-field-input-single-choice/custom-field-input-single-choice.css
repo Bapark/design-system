@@ -5,7 +5,7 @@
 }
 
 .dropdown {
-  composes: container from '../listbox/listbox.css';
+  composes: dropdown from '../dropdown/dropdown.css';
   box-sizing: border-box;
   background-color: var(--white);
   position: absolute;
