@@ -1,23 +1,36 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './dropdown.css';
+import useDropdownClose from '../../hooks/use-dropdown-close.js';
 
 export default function Dropdown(props) {
+  const wrapperRef = useRef(null);
+  const handleDropdownClose = () => {
+    // setShowOptions(false);
+    // setSearchValue(defaultValue);
+  };
+  useDropdownClose(wrapperRef, props.open, handleDropdownClose);
+
   if (!props.open) return null;
 
   return (
-    <div className={styles.dropdown} >
-      { props.children }
+    <div ref={wrapperRef} >
+      { props.content() }
+      <div className={styles.dropdown} >
+        { props.dropdownContent() }
+      </div>
     </div>
   );
 }
 
 Dropdown.propTypes = {
-  children: PropTypes.node,
+  content: PropTypes.node,
+  dropdownContent: PropTypes.node,
   open: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
-  children: undefined,
+  content: undefined,
+  dropdownContent: () => {},
   open: false,
 };

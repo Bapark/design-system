@@ -100,97 +100,101 @@ function CustomFieldInputMultipleChoice(props) {
   }, [expanded]);
 
   return (
-    <div ref={wrapperRef}>
-      <FormControl
-        error={props.errorText}
-        label={props.label}
-        labelId={`${props.id}-label`}
-        id={`${props.id}-autocomple`}
-        onKeyDown={onKeyDown}
-        readOnly={props.readOnly}
-      >
-        <div
-          className={classContainer}
-          onClick={onClick}
-          role="presentation"
-        >
-          <TagList
-            className={styles['tag-list']}
-            id={props.id}
-            labelledBy={`${props.id}-label`}
-            refs={valueRefs}
+    <FormControl
+      error={props.errorText}
+      label={props.label}
+      labelId={`${props.id}-label`}
+      id={`${props.id}-autocomple`}
+      onKeyDown={onKeyDown}
+      readOnly={props.readOnly}
+    >
+      <Dropdown
+        content={
+          <div
+            className={classContainer}
+            onClick={onClick}
+            role="presentation"
           >
-            {value.map((choice, index) => (
-              <Tag
-                defaultActive={index === 0}
-                id={`${props.id}-${choice.id}`}
-                key={`${props.id}-${choice.id}`}
-                onRemove={onChoiceRemove}
-                readOnly={props.readOnly}
-                ref={valueRefs[index]}
-              >
-                {choice.label}
-              </Tag>
-            ))}
-            {!props.readOnly && (
-              <input
-                aria-labelledby={`${props.id}-label`}
-                className={styles['autocomplete-input']}
-                id={`${props.id}-autocomple`}
-                onChange={onAutocompleteChange}
-                ref={autocompleteRef}
-                value={autocompleteValue}
-              />
-            )}
-          </TagList>
-          <div className={styles['icons-container']}>
-            {!props.readOnly && props.errorText && (
+            <TagList
+              className={styles['tag-list']}
+              id={props.id}
+              labelledBy={`${props.id}-label`}
+              refs={valueRefs}
+            >
+              {value.map((choice, index) => (
+                <Tag
+                  defaultActive={index === 0}
+                  id={`${props.id}-${choice.id}`}
+                  key={`${props.id}-${choice.id}`}
+                  onRemove={onChoiceRemove}
+                  readOnly={props.readOnly}
+                  ref={valueRefs[index]}
+                >
+                  {choice.label}
+                </Tag>
+              ))}
+              {!props.readOnly && (
+                <input
+                  aria-labelledby={`${props.id}-label`}
+                  className={styles['autocomplete-input']}
+                  id={`${props.id}-autocomple`}
+                  onChange={onAutocompleteChange}
+                  ref={autocompleteRef}
+                  value={autocompleteValue}
+                />
+              )}
+            </TagList>
+            <div className={styles['icons-container']}>
+              {!props.readOnly && props.errorText && (
+                <Icon
+                  className={styles.icon}
+                  currentColor="caution"
+                  fill="skip"
+                  name={iconCaution.id}
+                />
+              )}
+              {!props.readOnly && value.length > 0 && (
+                <Icon
+                  className={styles['clear-icon']}
+                  fill="skip"
+                  name={iconClear.id}
+                  onClick={onChoicesClear}
+                  onEnter={clearChoices}
+                  tabable={true}
+                  ariaLabel={`Remove all selected choices on ${props.label}`}
+                  role="button"
+                />
+              )}
               <Icon
                 className={styles.icon}
-                currentColor="caution"
+                name={props.readOnly ? iconCaretDownDisabled.id : iconCaretDown.id}
                 fill="skip"
-                name={iconCaution.id}
               />
-            )}
-            {!props.readOnly && value.length > 0 && (
-              <Icon
-                className={styles['clear-icon']}
-                fill="skip"
-                name={iconClear.id}
-                onClick={onChoicesClear}
-                onEnter={clearChoices}
-                tabable={true}
-                ariaLabel={`Remove all selected choices on ${props.label}`}
-                role="button"
-              />
-            )}
-            <Icon
-              className={styles.icon}
-              name={props.readOnly ? iconCaretDownDisabled.id : iconCaretDown.id}
-              fill="skip"
-            />
+            </div>
           </div>
-        </div>
-        { renderPopup && (visibleChoices.length === 0 ? (<NoOptions className={styles['no-options']} />) : (
-          <Listbox
-            className={styles['popup-container']}
-            labelledBy={`${props.id}-label`}
-            refs={choicesRefs}
-          >
-            {visibleChoices.map((choice, index) => (
-              <ListOption
-                key={`${props.id}-${choice.id}`}
-                onSelect={onChoiceSelect}
-                ref={choicesRefs[index]}
-                value={choice}
+        }
+        dropdownContent={
+          { renderPopup && (visibleChoices.length === 0 ? (<NoOptions className={styles['no-options']} />) : (
+              <Listbox
+                className={styles['popup-container']}
+                labelledBy={`${props.id}-label`}
+                refs={choicesRefs}
               >
-                {choice.label}
-              </ListOption>
-            ))}
-          </Listbox>)
-        )}
-      </FormControl>
-    </div>
+                {visibleChoices.map((choice, index) => (
+                  <ListOption
+                    key={`${props.id}-${choice.id}`}
+                    onSelect={onChoiceSelect}
+                    ref={choicesRefs[index]}
+                    value={choice}
+                  >
+                    {choice.label}
+                  </ListOption>
+                ))}
+              </Listbox>)
+          )}
+        }
+      />
+    </FormControl>
   );
 }
 

@@ -1,7 +1,11 @@
 ```js
 const ExampleChild = () => {
     return <h1>Example</h1>;
-  };
+};
+const ExampleButton = () => {
+    return <button>hit me</button>;
+};
 
-<Dropdown open={true} ><ExampleChild /></Dropdown>
+<Dropdown content={ExampleButton} open={true} dropdownContent={ExampleChild} >
+</Dropdown>
 ```
