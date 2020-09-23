@@ -7,18 +7,20 @@
 
   - Major/Minor/Patch: This is an example changelog item, usually can be the commit message.
   - Append new items to make git merging easier.
+</details>
+
+## v0.42.0
   - Minor: Add `className` and `classNameReadOnly` to `Tag` component API
   - Minor: Fix styling for input of `CustomFieldMultipleChoice` component
   - Minor: Custom Field Date Input is editable and uses the Calendar component
   - Patch: Perform simple refactor to avoid react re-rendering issue on `CustomFieldInputMultipleChoice`
   - Major: Invoke `CustomFieldInputMultipleChoice` `onChange` prop with an event-like object shape
-    Upgrade: The reference to the component is nested in the `target` key: `(event) => event.target`
+  - Upgrade: The reference to the component is nested in the `target` key: `(event) => event.target`
   - Major: Invoke `CustomFieldInputSingleChoice` `onChange` prop with an event-like object shape
-    Upgrade: The reference to the component is nested in the `target` key: `(event) => event.target`
+  - Upgrade: The reference to the component is nested in the `target` key: `(event) => event.target`
   - Minor: Implement `dirty` ref APIs on custom field components
   - Minor: Implement `name` prop APIs on custom field components
   - Minor: Implement `Form` component
-</details>
 
 ## v0.41.0
   - Major: Deprecate Icon v1 API: size, currentColor, fill, name, title
